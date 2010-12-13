@@ -8,6 +8,8 @@ environment without error and it looks as if it
 runs only with OpenSSL up to 0.9.x and but not
 1.0.x
 
+The code is a bit rusty and but most functionality
+works with some little bugs.
 
 The original author wrote:
 
