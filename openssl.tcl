@@ -95,7 +95,7 @@ namespace eval openssl {
     
 set config_file(rootca) {
 [ req ]
-default_bits			= 1024
+default_bits			= 4096
 default_keyfile			= ca.key
 distinguished_name		= req_distinguished_name
 x509_extensions			= v3_ca
@@ -113,7 +113,7 @@ nsCertType			= objsign,email,server
 
 set config_file(newserver) {
 [ req ]
-default_bits			= 1024
+default_bits			= 2048
 default_keyfile			= server.key
 distinguished_name		= req_distinguished_name
 string_mask			= nombstr
@@ -167,7 +167,7 @@ basicConstraints	= critical,CA:false
 
 set config_file(newclient) {
 [ req ]
-default_bits			= 1024
+default_bits			= 2048
 default_keyfile			= user.key
 distinguished_name		= req_distinguished_name
 string_mask			= nombstr
