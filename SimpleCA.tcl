@@ -56,25 +56,6 @@ set MenuCommands {
     
 }
 
-
-set config_file(rootca) {
-[ req ]
-default_bits			= 1024
-default_keyfile			= ca.key
-distinguished_name		= req_distinguished_name
-x509_extensions			= v3_ca
-string_mask			= nombstr
-req_extensions			= v3_req
-prompt				= no
-[ req_distinguished_name ]
-$attributes
-[ v3_ca ]
-basicConstraints		= critical,CA:true
-subjectKeyIdentifier		= hash
-[ v3_req ]
-nsCertType			= objsign,email,server
-}
-
 set config_file(_rootca) {
 [ req ]
 default_bits			= 1024
@@ -97,105 +78,6 @@ basicConstraints		= critical,CA:true
 subjectKeyIdentifier		= hash
 [ v3_req ]
 nsCertType			= objsign,email,server
-}
-
-set config_file(newserver) {
-[ req ]
-default_bits			= 1024
-default_keyfile			= server.key
-distinguished_name		= req_distinguished_name
-string_mask			= nombstr
-req_extensions			= v3_req
-prompt                          = no
-[ req_distinguished_name ]
-countryName			= $attr(C)
-stateOrProvinceName		= $attr(ST)
-localityName			= $attr(L)
-0.organizationName		= $attr(O)
-organizationalUnitName		= $attr(OU)
-commonName			= $attr(CN)
-emailAddress			= $attr(emailAddress)
-[ v3_req ]
-nsCertType			= server
-basicConstraints		= critical,CA:false
-}
-
-set config_file(signserver) {
-[ ca ]
-default_ca              = default_CA
-[ default_CA ]
-dir                     = .
-certs                   = .
-new_certs_dir           = ./ca.db.certs
-database                = ./ca.db.index
-serial                  = ./ca.db.serial
-RANDFILE                = ./random-bits
-certificate             = ./ca.crt
-private_key             = ./ca.key
-default_days            = 365
-default_crl_days        = 30
-default_md              = md5
-preserve                = no
-x509_extensions		= server_cert
-policy                  = policy_anything
-[ policy_anything ]
-countryName		= optional
-stateOrProvinceName	= optional
-localityName		= optional
-organizationName	= optional
-organizationalUnitName	= optional
-commonName              = supplied
-emailAddress            = optional
-[ server_cert ]
-#subjectKeyIdentifier	= hash
-authorityKeyIdentifier	= keyid:always
-extendedKeyUsage	= serverAuth,clientAuth,msSGC,nsSGC
-basicConstraints	= critical,CA:false
-}
-
-set config_file(newclient) {
-[ req ]
-default_bits			= 1024
-default_keyfile			= user.key
-distinguished_name		= req_distinguished_name
-string_mask			= nombstr
-req_extensions			= v3_req
-prompt                          = no
-[ req_distinguished_name ]
-commonName			= $attr(CN)
-emailAddress			= $attr(emailAddress)
-[ v3_req ]
-nsCertType			= client,email
-basicConstraints		= critical,CA:false
-}
-
-set config_file(signclient) {
-[ ca ]
-default_ca              = default_CA
-[ default_CA ]
-dir                     = .
-certs                   = .
-new_certs_dir           = ./ca.db.certs
-database                = ./ca.db.index
-serial                  = ./ca.db.serial
-RANDFILE                = ./random-bits
-certificate             = ./ca.crt
-private_key             = ./ca.key
-default_days            = 365
-default_crl_days        = 30
-default_md              = md5
-preserve                = yes
-x509_extensions		= client_cert
-policy                  = policy_anything
-[ policy_anything ]
-commonName              = supplied
-emailAddress            = supplied
-[ client_cert ]
-#SXNetID		= 3:yeak
-subjectAltName		= email:copy
-basicConstraints	= critical,CA:false
-authorityKeyIdentifier	= keyid:always
-extendedKeyUsage	= clientAuth,emailProtection
 }
 
 proc _GenerateConfigAttributes {attr} {
@@ -999,9 +881,9 @@ proc cmd::SetupRootCA {} {
 	ST {State or Province Name (full name)} {} ""
 	L {Locality Name (eg, City)} {} ""
 	O {Organization (eg, company) *} {SimpleCA} "!"
-	OU {Organizational Unit (eg, section)} {Demo CA} ""
+	OU {Organizational Unit (eg, section)} {Demo CA services} ""
 	CN {Common Name (eg, Root CA) *} {SimpleCA Demo CA} "!"
-	emailAddress {Email Address} {democa@democa.com} ""
+	emailAddress {Email Address} {democa@example.com} ""
 	*password {CA Key Password} {} "!*"
 	*again {Repeat Password} {} "!*" }]
 
@@ -1573,7 +1455,7 @@ if {[lindex $argv 0] == "-debug"} {
     set debug::level 1
 }
 
-wm title . "SimpleCA"
+wm title . "tcl-SimpleCA"
 . configure -menu .menu
 if { [string equal $tcl_platform(platform) windows] } {
     .menu add cascade -label System -menu .menu.system
