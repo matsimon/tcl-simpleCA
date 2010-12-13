@@ -1,0 +1,42 @@
+About SimpleCA
+
+This little tool was implemented back in 2001 by Joris Ballet 
+
+
+Original code from 2001 can not run in newer Tcl
+environment without error and it looks as if it
+runs only with OpenSSL up to 0.9.x and but not
+1.0.x
+
+
+The original author wrote:
+
+SimpleCA
+--------
+
+A simple gui solution to manage your x.509 certificates.
+
+SimpleCA implements a simple X.509 CA with a nice GUI. 
+You can manage ssl or personal certificates. 
+
+You have no configuration options: 
+all is based on sensible defaults (1024bit keys, etc...). 
+
+The basic features are present (generate certificate, 
+revoke certificate, export pkcs12, revocation lists).
+
+    Readme
+    Screenshot
+    Freewrapped executable for windows (openssl included)
+    Freewrapped executable for linux (requires openssl, get it here)
+    Tcl-only version - If you have Tcl installed or want to run your CA on a floppy disk.
+
+    Latest Development Release:Windows Linux Tcl. 
+
+sources: SimpleCA sources were available on http://zarathustra.be/WebSVN. 
+
+I am still looking for a public Subversion service, if you know a good one, please drop me a mail. SimpleCA is written in Tcl. Tcl is the best programming/scripting language ever invented.
+
+suggestions: If you want to contact me, or have bugs/ remarks/ suggestions, please email. I do respond on any mail I receive. If you did not receive a response, my SPAM filter caught your mail. 
+
+(http://users.skynet.be/ballet/joris/SimpleCA/)
