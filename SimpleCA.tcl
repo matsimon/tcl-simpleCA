@@ -25,6 +25,11 @@ source ConsoleAux.tcl
 source openssl.tcl
 source combobox.tcl
 
+# Workarounds for deprecated Tk 8.3 private interfaces 
+# (http://wiki.tcl.tk/3670)
+tk::unsupported::ExposePrivateCommand tkTabToWindow
+tk::unsupported::ExposePrivateCommand tkCancelRepeat
+
 set MenuCommands {
    
     #setup {Setup} {
