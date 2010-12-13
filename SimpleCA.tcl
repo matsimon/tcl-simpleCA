@@ -20,10 +20,10 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
 
-source /Devel/SimpleCA/v1/mclistbox.tcl
-source /Devel/SimpleCA/v1/ConsoleAux.tcl
-source /Devel/SimpleCA/v1/openssl.tcl
-source /Devel/SimpleCA/v1/combobox.tcl
+source mclistbox.tcl
+source ConsoleAux.tcl
+source openssl.tcl
+source combobox.tcl
 
 set MenuCommands {
    
