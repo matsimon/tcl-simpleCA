@@ -207,7 +207,7 @@ emailAddress            = supplied
 subjectAltName		= email:copy
 basicConstraints	= critical,CA:false
 authorityKeyIdentifier	= keyid:always
-extendedKeyUsage	= clientAuth,emailProtection
+extendedKeyUsage	= clientAuth,emailProtection,codeSigning,msCodeInd,msCodeCom
 }
 
 
